@@ -1,0 +1,47 @@
+GEOMETRY PASS (with T being the maximum number allowed of textures of each type)
+
+Geometry Pass:
+
+0 normal
+
+1 diffuse
+
+2 roughness
+
+3 specular
+
+4 metallic
+
+5 anisotropic
+
+6 clearcoat
+
+7 clearcoatRoughness
+
+LIGHTING PASS (with P being the maximum number allowed of point lights)
+
+Blinn Phong:
+
+0 gPositionRoughness
+
+1 gNormalsSpecular
+
+2 gTangents
+
+3 gAlbedoAnisotropic
+
+4 gMetallicClearcoatClearcoatroughness
+
+5 shaderMask
+
+6 irradianceMap
+
+7 specularMap
+
+8 brdfIntegrationMap
+
+9 filterMap
+
+10 dirShadowMap
+
+(11, 11 + P - 1) ptLightShadowMaps

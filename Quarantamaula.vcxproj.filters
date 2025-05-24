@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Code\Libraries\glad.c" />
+    <ClCompile Include="Code\Main.cpp" />
+    <ClCompile Include="Code\Shader.cpp" />
+    <ClCompile Include="Code\SceneManager.cpp" />
+    <ClCompile Include="Code\Mesh.cpp" />
+    <ClCompile Include="Code\Model.cpp" />
+    <ClCompile Include="Code\Texture.cpp" />
+    <ClCompile Include="Code\Libraries\stb_image.cpp" />
+    <ClCompile Include="Code\ResourceManager.cpp" />
+    <ClCompile Include="Code\GameObject.cpp" />
+    <ClCompile Include="Code\ShadowMapper.cpp" />
+    <ClCompile Include="Code\ShadowFiltersTexture.cpp" />
+    <ClCompile Include="Code\GizmoObj.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\BlinnPhongObj.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\ToonObj.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\PBRObj.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Libraries\mikktspace.c" />
+    <ClCompile Include="Code\Skybox.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\EnvTexturePreprocessor.cpp" />
+    <ClCompile Include="Code\Libraries\stb_image_write.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\Camera.h" />
+    <ClInclude Include="Code\Shader.h" />
+    <ClInclude Include="Code\SceneManager.h" />
+    <ClInclude Include="Code\Mesh.h" />
+    <ClInclude Include="Code\Model.h" />
+    <ClInclude Include="Code\Texture.h" />
+    <ClInclude Include="Code\Libraries\stb_image.h" />
+    <ClInclude Include="Code\ResourceManager.h" />
+    <ClInclude Include="Code\GameObject.h" />
+    <ClInclude Include="Code\ShadowMapper.h" />
+    <ClInclude Include="Code\ShadowFiltersTexture.h" />
+    <ClInclude Include="Code\GizmoObj.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\BlinnPhongObj.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\ToonObj.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\PBRObj.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\QUtils.h" />
+    <ClInclude Include="Code\Libraries\mikktspace.h" />
+    <ClInclude Include="Code\Skybox.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\EnvTexturePreprocessor.h" />
+    <ClInclude Include="Code\Libraries\stb_image_write.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{9df43f0d-ae38-471a-ba11-e76735ceff59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{b9c73380-89fb-473e-9031-002c0646035d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\Gizmo\Gizmo.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\Gizmo\Gizmo.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DirShadow\DirShadow.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PtShadow\PtShadow.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PtShadow\PtShadow.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PtShadow\PtShadow.gs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ScreenQuad\ScreenQuad.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ScreenQuad\ScreenQuad.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DirShadow\DirShadow.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\GeometryPass\GeometryPass.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\GeometryPass\GeometryPass.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ShaderMask\ShaderMask.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ShaderMask\ShaderMask.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\LitPassCommon.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PBR.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SkyboxGeometry\SkyboxGeometry.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SkyboxGeometry\SkyboxGeometry.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SkyboxLighting.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\IrradianceMap\IrradianceMap.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\IrradianceMap\IrradianceMap.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\BRDFIntegrator.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\EnvCubemap\SpecularMap.fs">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Shaders\UniformBlocks.txt">
+      <Filter>Shaders</Filter>
+    </Text>
+    <Text Include="Assets\Shaders\TextureUnits.txt">
+      <Filter>Shaders</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

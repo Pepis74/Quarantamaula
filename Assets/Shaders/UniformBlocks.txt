@@ -1,0 +1,64 @@
+layout(std140, binding = 0) uniform VPMatrices //Size 128B
+{
+    // The matrix used to convert the vertices from world space to view space
+    mat4 VPM_view; //B 0
+    // The matrix used to convert the vertices from view space to clip space
+    mat4 VPM_projection; //B 64
+};
+
+layout(std140, binding = 1) uniform DirectionalLight //Size 28B
+{
+    // The light's direction
+    vec3 DL_direction; //B 0
+    // The strength of the light
+    float DL_intensity; //B 12
+    // The light's color
+    vec3 DL_color; //B 16
+};
+
+layout(std140, binding = 2) uniform PointLights //Size 248B
+{
+    // The light's position
+    vec3 PL_position[5]; //B 0
+    // The light's color
+    vec3 PL_color[5]; //B 80
+    // The linear term in the attenuation function
+    float PL_intensity[5]; //B 160
+    // The number of point lights 
+    uint PL_num; //B 240
+    // The position of the far plane in the projection matrix used to render the depth cubemaps
+    float PL_farPlane; //B 244
+};
+
+layout(std140, binding = 3) uniform LightingMisc //Size 76B
+{
+    // The matrix used to convert fragment positions in world space to the directional light space
+    mat4 LM_dirLightSpaceMat; //B 0
+    // The position of the camera in world space 
+    vec3 LM_viewPos; //B 64
+};
+
+layout(std140, binding = 4) uniform FilterMapParams //Size 16B
+{
+    // Number of filters per axis of the filterMap texture
+    uint FMP_mapSize; //B 0
+    // Number of samples per axis of a filter
+    uint FMP_filterSize; //B 4
+    // Radius of the filters stored in the filterMap texture
+    float FMP_dirRadius; //B 8
+    // Radius of the filters stored in the filterMap texture
+    float FMP_ptRadius; //B 12
+};
+
+layout(std140, binding = 5) uniform LightingPassCommon //Size 16B
+{
+    // Index that determines what to show on screen. 0 - regular render, 1 - G Position, 2 - G Normals, 3 - G Albedo, 4 - G Specular,
+    // 5 - Shader Mask
+    uint LPC_showIndex; //B 0
+    // Exposure parameter for HDR tone mapping
+    float LPC_exposure; //B 4
+    // Gamma constant for gamma correction
+    float LPC_gamma; //B 8
+    // Gamma constant for gamma correction
+    uint LPC_roughnessMipLevels; //B 12
+};
