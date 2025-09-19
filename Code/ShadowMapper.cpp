@@ -125,7 +125,6 @@ void ShadowMapper::init(unsigned int inWWidth, unsigned int inWHeight, float inS
 
 void ShadowMapper::render()
 {
-
 	//1. Render directional shadow map
 	//Change the viewport's resolution so it matches that of the texture we're gonna use to store the directional shadow map
 	glViewport(0, 0, dirShadowRes, dirShadowRes);

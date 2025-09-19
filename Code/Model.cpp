@@ -216,10 +216,13 @@ Model::Model(const char* filePath)
         }
         else if (token == "f")
         {
-            // Face (assumed triangular).
-            if (tokens.size() < 4)
+            // MODIFICATION START: Handle faces with 3 (triangles) or 4 (quads) vertices.
+            if (tokens.size() < 4) // A valid face needs at least 3 vertices.
                 continue;
-            for (int i = 1; i <= 3; i++)
+
+            // Parse all vertices of the face into a temporary list.
+            std::vector<Vertex> faceVertices;
+            for (size_t i = 1; i < tokens.size(); ++i)
             {
                 std::vector<std::string> subTokens = Split(tokens[i], '/', false);
                 int vIndex = (subTokens.size() > 0 && !subTokens[0].empty()) ? std::stoi(subTokens[0]) - 1 : -1;
@@ -242,9 +245,25 @@ Model::Model(const char* filePath)
                 else
                     vert.normal = glm::vec3(0.f, 1.f, 0.f);
 
-                currVertices.push_back(vert);
+                faceVertices.push_back(vert);
+            }
+
+            // Triangulate the face using a fan triangulation.
+            // This works for any convex polygon, including triangles and quads.
+            // For a triangle (v0, v1, v2), it creates one triangle: (v0, v1, v2).
+            // For a quad (v0, v1, v2, v3), it creates two triangles: (v0, v1, v2) and (v0, v2, v3).
+            for (size_t i = 1; i < faceVertices.size() - 1; ++i)
+            {
+                currVertices.push_back(faceVertices[0]);
+                currIndices.push_back(currVertices.size() - 1);
+
+                currVertices.push_back(faceVertices[i]);
+                currIndices.push_back(currVertices.size() - 1);
+
+                currVertices.push_back(faceVertices[i + 1]);
                 currIndices.push_back(currVertices.size() - 1);
             }
+            // MODIFICATION END
         }
         else if (token == "o" || token == "g")
         {

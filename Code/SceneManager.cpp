@@ -271,11 +271,11 @@ void SceneManager::setUpGameObjects()
 	//toons.push_back(ToonObj(glm::vec3(0.6f, 0.0f, 0.6f), glm::vec3(0.01f), glm::vec3(0.0f), "teapot"));
 
 	//PBRs
-	pbrs.push_back(PBRObj("chess", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(5.0f), 0.9f, 0.6f, 0.0f, 0.0f, 0.0f, 0.1f));
-	pbrs.push_back(PBRObj("blackChecker", glm::vec3(2.2f, 0.2f, -0.32f), glm::vec3(0.35f), glm::vec3(0.0f), glm::vec3(0.7f, 0.7f, 0.7f), 0.9f, 0.5f, 0.0f, 0.0f, 1.0f, 0.05f));
+	//pbrs.push_back(PBRObj("chess", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(5.0f), 0.9f, 0.6f, 0.0f, 0.0f, 0.0f, 0.1f));
+	//pbrs.push_back(PBRObj("blackChecker", glm::vec3(2.2f, 0.2f, -0.32f), glm::vec3(0.35f), glm::vec3(0.0f), glm::vec3(0.7f, 0.7f, 0.7f), 0.9f, 0.5f, 0.0f, 0.0f, 1.0f, 0.05f));
 	pbrs.push_back(PBRObj("whiteChecker", glm::vec3(2.2f, 0.2f, 0.32f), glm::vec3(0.35f), glm::vec3(0.0f), glm::vec3(0.7f, 0.7f, 0.7f), 0.9f, 0.5f, 0.0f, 0.0f, 1.0f, 0.05f));
 	//toons.push_back(ToonObj("arrow", glm::vec3(2.2f, 0.9f, 0.32f), glm::vec3(0.1f), glm::vec3(-90.0f, 0.0f, 0.0f), glm::vec3(0.9f, 0.0f, 0.0f)));
-	//pbrs.push_back(PBRObj("sphere", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f), 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.1f));
+	//pbrs.push_back(PBRObj("sphere", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f), 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.1f));
 
 	//Set up regular gameobjects and shadow casters
 	for (unsigned int i = 0 ; i < blinnPhongs.size(); i++)

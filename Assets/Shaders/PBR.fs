@@ -119,7 +119,7 @@ vec2 filterPos;
 //
 const float PI = 3.1415927;
 
-const float AMBIENT_STRENGTH = 0.03;
+const float AMBIENT_STRENGTH = 0.05;
 
 const float SHADOW_BIAS = 0.02;
 
