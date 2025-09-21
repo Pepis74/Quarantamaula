@@ -35,6 +35,10 @@ public:
 		glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 		//std::cout << uniformName << " texture bound at texture unit " << textureUnit << std::endl;
 	}
+
+	static float lerp(float a, float b, float t) {
+		return a + t * (b - a);
+	}
 };
 
 #endif
