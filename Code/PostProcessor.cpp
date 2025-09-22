@@ -1,8 +1,14 @@
 #include "PostProcessor.h"
 
-void PostProcessor::init(unsigned int* inGBufferTextures)
+unsigned int* PostProcessor::gBufferTextures;
+unsigned int PostProcessor::screenQuadVAO;
+unsigned int PostProcessor::ssaoKernelsTex;
+unsigned int PostProcessor::ssaoFBO;
+
+void PostProcessor::init(unsigned int windowWidth, unsigned int windowHeight, unsigned int inScreenQuadVAO, unsigned int* inGBufferTextures)
 {
 	gBufferTextures = inGBufferTextures;
+    screenQuadVAO = inScreenQuadVAO;
 
 	// Prepare the ssao samples 3D texture
    
@@ -41,9 +47,44 @@ void PostProcessor::init(unsigned int* inGBufferTextures)
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glBindTexture(GL_TEXTURE_3D, 0);
 
+    //Create ssao framebuffer
+    glGenFramebuffers(1, &ssaoFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, ssaoFBO);
+
+    //We bind the G buffer's fifth texture, because the ssao will be output in its alpha channel
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gBufferTextures[4], 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void PostProcessor::ambientOcclusion()
 {
-	
+    //Bind the SSAO framebuffer
+    glBindFramebuffer(GL_FRAMEBUFFER, ssaoFBO);
+
+	//We modify the color mask to only write over the alpha channel and not other data in the rgb channels of the texture
+    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
+
+    unsigned int shaderID = ResourceManager::getShader("ssao")->getID();
+    glUseProgram(shaderID);
+
+    //Set g buffer texture units in the shader
+    QUtils::bindTexture2D(shaderID, "gPositionRoughness", 0, gBufferTextures[0]);
+    QUtils::bindTexture2D(shaderID, "gNormalsSpecular", 1, gBufferTextures[1]);
+    QUtils::bindTexture2D(shaderID, "gTangents", 2, gBufferTextures[2]);
+    QUtils::bindTexture3D(shaderID, "kernelsTex", 3, ssaoKernelsTex);
+
+    // Set the SSAO parameters in the shader
+    glUniform1ui(glGetUniformLocation(shaderID, "kernelSamples"), SSAO_KERNEL_SAMPLES);
+    glUniform1ui(glGetUniformLocation(shaderID, "kernelsTexSize"), SSAO_TEXTURE_SIZE);
+    glUniform1f(glGetUniformLocation(shaderID, "kernelRadius"), SSAO_KERNEL_RADIUS);
+    glUniform1f(glGetUniformLocation(shaderID, "bias"), SSAO_BIAS);
+
+    //Bind the VAO and make draw the screen quad
+    glBindVertexArray(screenQuadVAO);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glBindVertexArray(0);
+
+    //Restore regular rendering state
+    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

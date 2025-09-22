@@ -30,7 +30,7 @@ Blinn Phong:
 
 3 gAlbedoAnisotropic
 
-4 gMetallicClearcoatClearcoatroughness
+4 gMetallicClearcoatClearcoatroughnessAO
 
 5 shaderMask
 

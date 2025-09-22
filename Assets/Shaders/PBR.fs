@@ -79,7 +79,7 @@ uniform sampler2D gTangents;
 //
 uniform sampler2D gAlbedoAnisotropic;
 //
-uniform sampler2D gMetallicClearcoatClearcoatroughness;
+uniform sampler2D gMetallicClearcoatClearcoatroughnessAO;
 //
 uniform sampler2D shaderMask;
 // The irradiance map for diffuse ambient Lighting
@@ -463,7 +463,7 @@ void main()
         baseColor = albedoAnisotropic.rgb;
         anisotropic = albedoAnisotropic.a;
 
-        vec4 metallicClearcoatClearcoatroughness = texture(gMetallicClearcoatClearcoatroughness, texCoord);
+        vec4 metallicClearcoatClearcoatroughness = texture(gMetallicClearcoatClearcoatroughnessAO, texCoord);
         metallic = metallicClearcoatClearcoatroughness.r;
         clearcoat = metallicClearcoatClearcoatroughness.g;
         clearcoatRoughness = metallicClearcoatClearcoatroughness.b;

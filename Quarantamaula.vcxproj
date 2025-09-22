@@ -227,6 +227,7 @@
     <None Include="Assets\Shaders\SkyboxGeometry\SkyboxGeometry.fs" />
     <None Include="Assets\Shaders\SkyboxGeometry\SkyboxGeometry.vs" />
     <None Include="Assets\Shaders\SkyboxLighting.fs" />
+    <None Include="Assets\Shaders\SSAO.fs" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\Shaders\TextureUnits.txt" />

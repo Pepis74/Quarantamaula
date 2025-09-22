@@ -4,7 +4,7 @@ layout (location = 0) out vec4 gPositionRoughness;
 layout (location = 1) out vec4 gNormalsSpecular;
 layout (location = 2) out vec4 gTangents;
 layout (location = 3) out vec4 gAlbedoAnisotropic;
-layout (location = 4) out vec4 gMetallicClearcoatClearcoatroughness;
+layout (location = 4) out vec4 gMetallicClearcoatClearcoatroughnessAO;
 
 layout(std140, binding = 5) uniform LightingPassCommon //Size 16B
 {

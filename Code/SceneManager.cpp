@@ -51,6 +51,7 @@ void SceneManager::init(unsigned int inWWidth, unsigned int inWHeight, unsigned 
 	ResourceManager::loadShader("Assets/Shaders/EnvCubemap/EnvCubemap.vs", "Assets/Shaders/EnvCubemap/IrradianceMap.fs", "irradianceMap");
 	ResourceManager::loadShader("Assets/Shaders/EnvCubemap/EnvCubemap.vs", "Assets/Shaders/EnvCubemap/SpecularMap.fs", "specularMap");
 	ResourceManager::loadShader("Assets/Shaders/LitPassCommon.vs", "Assets/Shaders/BRDFIntegrator.fs", "brdfIntegrator");
+	ResourceManager::loadShader("Assets/Shaders/LitPassCommon.vs", "Assets/Shaders/SSAO.fs", "ssao");
 	ResourceManager::loadModel("Assets/Models/Plane/plane.obj", "plane");
 	ResourceManager::loadModel("Assets/Models/ChessBoard/Untitled.obj", "chess");
 	ResourceManager::loadModel("Assets/Models/Checker/Black.obj", "blackChecker");
@@ -86,6 +87,7 @@ void SceneManager::init(unsigned int inWWidth, unsigned int inWHeight, unsigned 
 
 	//
 	ShadowMapper::init(windowWidth, windowHeight, inShadowRange, inShadowRes, 8, 8, &shadowCastingGameObjects, &dirLight, &ptLights);
+	PostProcessor::init(windowWidth, windowHeight, screenQuadVAO, gBufferTextures);
 
 	EnvTexturePreprocessor::init(screenQuadVAO);
 	EnvTexturePreprocessor::generateSpecularMap("lowRes");
@@ -271,8 +273,8 @@ void SceneManager::setUpGameObjects()
 	//toons.push_back(ToonObj(glm::vec3(0.6f, 0.0f, 0.6f), glm::vec3(0.01f), glm::vec3(0.0f), "teapot"));
 
 	//PBRs
-	//pbrs.push_back(PBRObj("chess", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(5.0f), 0.9f, 0.6f, 0.0f, 0.0f, 0.0f, 0.1f));
-	//pbrs.push_back(PBRObj("blackChecker", glm::vec3(2.2f, 0.2f, -0.32f), glm::vec3(0.35f), glm::vec3(0.0f), glm::vec3(0.7f, 0.7f, 0.7f), 0.9f, 0.5f, 0.0f, 0.0f, 1.0f, 0.05f));
+	pbrs.push_back(PBRObj("chess", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(5.0f), 0.9f, 0.6f, 0.0f, 0.0f, 0.0f, 0.1f));
+	pbrs.push_back(PBRObj("blackChecker", glm::vec3(2.2f, 0.2f, -0.32f), glm::vec3(0.35f), glm::vec3(0.0f), glm::vec3(0.7f, 0.7f, 0.7f), 0.9f, 0.5f, 0.0f, 0.0f, 1.0f, 0.05f));
 	pbrs.push_back(PBRObj("whiteChecker", glm::vec3(2.2f, 0.2f, 0.32f), glm::vec3(0.35f), glm::vec3(0.0f), glm::vec3(0.7f, 0.7f, 0.7f), 0.9f, 0.5f, 0.0f, 0.0f, 1.0f, 0.05f));
 	//toons.push_back(ToonObj("arrow", glm::vec3(2.2f, 0.9f, 0.32f), glm::vec3(0.1f), glm::vec3(-90.0f, 0.0f, 0.0f), glm::vec3(0.9f, 0.0f, 0.0f)));
 	//pbrs.push_back(PBRObj("sphere", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f), 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.1f));
@@ -378,13 +380,18 @@ void SceneManager::render()
 			obj->drawGeometry(shaderID);
 		}
 	}
+
+	//AO pass
+	//Disable face culling and depth testing to be able to see the screen quad
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	//Clear the buffer bits
+	glClear(GL_COLOR_BUFFER_BIT);
+	PostProcessor::ambientOcclusion();
 	
 	//Lighting pass
 	//Bind the default framebuffer to render to screen
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	//Disable face culling and depth testing to be able to see the screen quad
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
 	//Clear the buffer bits
 	glClear(GL_COLOR_BUFFER_BIT);
 	//Reenable blending to blend the different screen quads of the different shaders
@@ -448,7 +455,7 @@ void SceneManager::render()
 	QUtils::bindTexture2D(shaderID, "gNormalsSpecular", 1, gBufferTextures[1]);
 	QUtils::bindTexture2D(shaderID, "gTangents", 2, gBufferTextures[2]);
 	QUtils::bindTexture2D(shaderID, "gAlbedoAnisotropic", 3, gBufferTextures[3]);
-	QUtils::bindTexture2D(shaderID, "gMetallicClearcoatClearcoatroughness", 4, gBufferTextures[4]);
+	QUtils::bindTexture2D(shaderID, "gMetallicClearcoatClearcoatroughnessAO", 4, gBufferTextures[4]);
 	//Set appropriate shader mask texture
 	QUtils::bindTexture2D(shaderID, "shaderMask", NUM_G_BUFFER_TEXTURES, shaderMaskTextures[0]);
 

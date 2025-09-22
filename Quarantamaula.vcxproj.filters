@@ -31,6 +31,7 @@
     </ClCompile>
     <ClCompile Include="Code\EnvTexturePreprocessor.cpp" />
     <ClCompile Include="Code\Libraries\stb_image_write.cpp" />
+    <ClCompile Include="Code\PostProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Camera.h" />
@@ -63,6 +64,7 @@
     </ClInclude>
     <ClInclude Include="Code\EnvTexturePreprocessor.h" />
     <ClInclude Include="Code\Libraries\stb_image_write.h" />
+    <ClInclude Include="Code\PostProcessor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -137,6 +139,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Assets\Shaders\EnvCubemap\SpecularMap.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SSAO.fs">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

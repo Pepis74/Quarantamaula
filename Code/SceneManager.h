@@ -15,6 +15,7 @@
 #include "Skybox.h"
 #include "ShadowMapper.h"
 #include "QUtils.h"
+#include "PostProcessor.h"
 #include "EnvTexturePreprocessor.h"
 
 class SceneManager {
@@ -50,7 +51,7 @@ private:
 	//The framebuffer we render to during the geometry pass
 	static unsigned int gBuffer;
 	//The textures rendered during the geometry pass used as input for the lighting pass. 0 - position/roughness, 1 - normals/specular,
-	// 2 - tangents/ao, 3 - albedo/anisotropic, 4 - metallic/clearcoat/clearcoatRoughness
+	// 2 - tangents, 3 - albedo/anisotropic, 4 - metallic/clearcoat/clearcoatRoughness/ao
 	static unsigned int gBufferTextures[NUM_G_BUFFER_TEXTURES];
 	//The shader mask buffers for each shader. 0 R - Blinn-Phong, 1 G - Toon, 2 B - PBR
 	static unsigned int shaderMaskBuffers[1];

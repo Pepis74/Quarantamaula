@@ -4,7 +4,7 @@ layout (location = 0) out vec4 gPositionRoughness;
 layout (location = 1) out vec4 gNormalsSpecular;
 layout (location = 2) out vec4 gTangents;
 layout (location = 3) out vec4 gAlbedoAnisotropic;
-layout (location = 4) out vec4 gMetallicClearcoatClearcoatroughness;
+layout (location = 4) out vec4 gMetallicClearcoatClearcoatroughnessAO;
 
 // Texture coordinates obtained from the vertex shader
 in vec2 texCoord;
@@ -125,5 +125,5 @@ void main()
     // Store the diffuse in the rgb and anisotropic in the a of the fourth G buffer
     gAlbedoAnisotropic = vec4(endDiffuse, endAnisotropic);
     // Store the metallic in the r, the clearcoat in the g and clearcoat roughness in the b of the fifth G buffer
-    gMetallicClearcoatClearcoatroughness = vec4(endMetallic, endClearcoat, endClearcoatRoughness, 0.0);
+    gMetallicClearcoatClearcoatroughnessAO = vec4(endMetallic, endClearcoat, endClearcoatRoughness, 0.0);
 }  
