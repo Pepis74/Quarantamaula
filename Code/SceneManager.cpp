@@ -385,8 +385,6 @@ void SceneManager::render()
 	//Disable face culling and depth testing to be able to see the screen quad
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
-	//Clear the buffer bits
-	glClear(GL_COLOR_BUFFER_BIT);
 	PostProcessor::ambientOcclusion();
 	
 	//Lighting pass
@@ -408,8 +406,8 @@ void SceneManager::render()
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
 
-	/*//Blinn Phong
-	shaderID = ResourceManager::getShader("blinnPhong")->getID();
+	//Blinn Phong
+	/*shaderID = ResourceManager::getShader("blinnPhong")->getID();
 	glUseProgram(shaderID);
 
 	//Set g buffer texture units in the shader
