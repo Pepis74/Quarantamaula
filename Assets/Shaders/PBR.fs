@@ -463,10 +463,11 @@ void main()
         baseColor = albedoAnisotropic.rgb;
         anisotropic = albedoAnisotropic.a;
 
-        vec4 metallicClearcoatClearcoatroughness = texture(gMetallicClearcoatClearcoatroughnessAO, texCoord);
-        metallic = metallicClearcoatClearcoatroughness.r;
-        clearcoat = metallicClearcoatClearcoatroughness.g;
-        clearcoatRoughness = metallicClearcoatClearcoatroughness.b;
+        vec4 metallicClearcoatClearcoatroughnessAO = texture(gMetallicClearcoatClearcoatroughnessAO, texCoord);
+        metallic = metallicClearcoatClearcoatroughnessAO.r;
+        clearcoat = metallicClearcoatClearcoatroughnessAO.g;
+        clearcoatRoughness = metallicClearcoatClearcoatroughnessAO.b;
+        float occlusion = metallicClearcoatClearcoatroughnessAO.a;
 
         // Compute view direction
         vec3 V = normalize(LM_viewPos - position);
@@ -480,7 +481,7 @@ void main()
         float NdotV = abs(dot(N, V)) + 1e-5;
         vec3 F0 = mix(vec3(0.16 * specular * specular), baseColor, metallic);
         vec3 F0c = vec3(0.04);
-        vec3 ambient = computeAmbient(N, V, F0, F0c, NdotV);
+        vec3 ambient = computeAmbient(N, V, F0, F0c, NdotV) * occlusion;
 
         vec3 tempFragColor;
 
@@ -545,7 +546,11 @@ void main()
             fragColor = vec4(vec3(clearcoatRoughness), 1.0);
             break;
 
-        case 11:
+        case 11: 
+            fragColor = vec4(vec3(occlusion), 1.0);
+            break;
+
+        case 12:
             fragColor = vec4(0.0, 0.0, 1.0, 1.0);
             break;
         }

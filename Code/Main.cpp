@@ -1,8 +1,18 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <Windows.h>  
 #include "Camera.h"
 #include "SceneManager.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+	__declspec(dllexport) DWORD NvOptimusEnablement = 1;
+	__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+#ifdef __cplusplus
+}
+#endif
 
 void processInput(GLFWwindow* window);
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
